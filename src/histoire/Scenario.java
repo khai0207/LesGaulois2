@@ -16,5 +16,5 @@ public class Scenario {
 			asterix.frapper(minus);
 		} while (minus.getForce() > 0);
 	}
-
+	/* test tp2 */
 }
