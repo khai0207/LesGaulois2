@@ -1,9 +1,14 @@
 package personnages;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Gaulois {
+	private static final Logger LOGGER = Logger.getLogger(Gaulois.class.getName());
 	private String nom;
-	private int force;
 	private int effetPotion = 1;
+	private int force, nb_trophees;
+	private Equipement trophees[] = new Equipement[100];
 
 	public Gaulois(String nom, int force) {
 		this.nom = nom;
@@ -15,39 +20,55 @@ public class Gaulois {
 	}
 
 	public void parler(String texte) {
-		System.out.println(prendreParole() + "<< " + texte + ">>");
+	    if (LOGGER.isLoggable(Level.INFO)) {
+	        LOGGER.info(prendreParole() + "<< " + texte + ">>");
+	    }
 	}
 
+//	private String prendreParole() {
+//		return "Le gaulois " + nom + " : ";
+//	}
 	private String prendreParole() {
-		return "Le gaulois " + nom + " : ";
+		String texte = "Le gaulois " + nom + " : ";
+		return texte;
 	}
+
+//	public void frapper(Romain romain) {
+//		LOGGER.info(nom + " envoie un grand coup dans la machoire de " + romain.getNom());
+//		romain.recevoirCoup((force / 3) * effetPotion);
+//	}
 
 	public void frapper(Romain romain) {
-		System.out.println(nom + " envoie un grand coup dans la machoire de " + romain.getNom());
-		romain.recevoirCoup((force / 3)*effetPotion);
+		LOGGER.info(nom + " envoie un grand coup dans la machoire de " + romain.getNom());
+		Equipement trophees[] = romain.recevoirCoup((force / 3) * effetPotion);
+		for (int i = 0; trophees != null && i < trophees.length; i++, nb_trophees++) {
+			this.trophees[nb_trophees] = trophees[i];
+		}
+		return;
 	}
 
 	@Override
 	public String toString() {
 		return "Gaulois [nom=" + nom + ", force=" + force + ", effetPotion=" + effetPotion + "]";
 	}
+
 	public void boirePotion(int forcePotion) {
 		this.effetPotion = forcePotion;
 		parler("Merci Druide, je sens que ma force est " + forcePotion + " fois decuplee.");
-	}	
+	}
 
 	public static void main(String[] args) {
 		Gaulois asterix = new Gaulois("Asterix", 8);
-		System.out.println(asterix);
-		System.out.println("Test methode getNom");
-		System.out.println(asterix.getNom());
-		System.out.println("Test methode prendreParole");
-		asterix.prendreParole();
-		System.out.println("Test methode parler");
+		LOGGER.info(String.format("Gaulois: %s", asterix));
+		LOGGER.info("Test methode getNom");
+		LOGGER.info(asterix.getNom());
+		LOGGER.info("Test methode prendreParole");
+		LOGGER.info(asterix.prendreParole());
+		LOGGER.info("Test methode parler");
 		asterix.parler("Bonjour");
-		System.out.println("Test methode frapper");
-		asterix.frapper(new Romain("Minus",9));
-		System.out.println("Test methode boirePotion");
+		LOGGER.info("Test methode frapper");
+		asterix.frapper(new Romain("Minus", 9));
+		LOGGER.info("Test methode boirePotion");
 		asterix.boirePotion(10);
 	}
 }
