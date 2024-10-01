@@ -20,9 +20,9 @@ public class Gaulois {
 	}
 
 	public void parler(String texte) {
-	    if (LOGGER.isLoggable(Level.INFO)) {
-	        LOGGER.info(prendreParole() + "<< " + texte + ">>");
-	    }
+		if (LOGGER.isLoggable(Level.INFO)) {
+			LOGGER.info(prendreParole() + "<< " + texte + ">>");
+		}
 	}
 
 //	private String prendreParole() {
@@ -57,6 +57,19 @@ public class Gaulois {
 		parler("Merci Druide, je sens que ma force est " + forcePotion + " fois decuplee.");
 	}
 
+	public void faireUneDonnation(Musee musee) {
+		if (nb_trophees != 0) {
+			String texte = "Je donne au musee tous mes trophees : ";
+			for (int i = 0; i < nb_trophees; i++) {
+				texte += "\n- " + trophees[i];
+				musee.donnerTrophees(this, trophees[i]);
+				trophees[i] = null;
+			}
+			nb_trophees = 0;
+			parler(texte);
+		}
+	}
+
 	public static void main(String[] args) {
 		Gaulois asterix = new Gaulois("Asterix", 8);
 		LOGGER.info(String.format("Gaulois: %s", asterix));
@@ -70,5 +83,12 @@ public class Gaulois {
 		asterix.frapper(new Romain("Minus", 9));
 		LOGGER.info("Test methode boirePotion");
 		asterix.boirePotion(10);
+		LOGGER.info("Test methode faireUneDonnation");
+		Musee musee = new Musee();
+	    asterix.trophees[asterix.nb_trophees++] = Equipement.BOUCLIER; 
+	    asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;  
+	    asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;  
+	    asterix.faireUneDonnation(musee);
+	    musee.extraireInstructionsCaml(asterix);
 	}
 }
