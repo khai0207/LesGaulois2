@@ -85,10 +85,10 @@ public class Gaulois {
 		asterix.boirePotion(10);
 		LOGGER.info("Test methode faireUneDonnation");
 		Musee musee = new Musee();
-	    asterix.trophees[asterix.nb_trophees++] = Equipement.BOUCLIER; 
-	    asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;  
-	    asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;  
-	    asterix.faireUneDonnation(musee);
-	    musee.extraireInstructionsCaml(asterix);
+		asterix.trophees[asterix.nb_trophees++] = Equipement.BOUCLIER;
+		asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;
+		asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;
+		asterix.faireUneDonnation(musee);
+		musee.extraireInstructionsCaml(asterix);
 	}
 }
