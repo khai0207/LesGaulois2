@@ -18,7 +18,6 @@
  * (minus.getForce() > 0); }
  * 
  * 
- * test tp2 }
  */
 
 package histoire;
@@ -26,6 +25,7 @@ package histoire;
 import personnages.Druide;
 import personnages.Equipement;
 import personnages.Gaulois;
+import personnages.Musee;
 import personnages.Romain;
 
 public class Scenario {
@@ -55,9 +55,10 @@ public class Scenario {
 		} while (milexcus.getForce() > 0);
 		
 //		Partie a decommenter
-		
-//		Musee musee = new Musee();
-//		asterix.faireUneDonnation(musee);
+		System.out.println("Test methode faireUneDonnation");
+		Musee musee = new Musee();
+		asterix.faireUneDonnation(musee);
+		musee.extraireInstructionsCaml(asterix);
 
 	}
 

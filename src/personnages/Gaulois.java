@@ -58,17 +58,20 @@ public class Gaulois {
 	}
 
 	public void faireUneDonnation(Musee musee) {
-		if (nb_trophees != 0) {
-			String texte = "Je donne au musee tous mes trophees : ";
-			for (int i = 0; i < nb_trophees; i++) {
-				texte += "\n- " + trophees[i];
-				musee.donnerTrophees(this, trophees[i]);
-				trophees[i] = null;
-			}
-			nb_trophees = 0;
-			parler(texte);
-		}
+	    if (nb_trophees != 0) {
+	        String texte = "Je donne au musee tous mes trophees : ";
+	        for (int i = 0; i < nb_trophees; i++) {
+	            if (trophees[i] != null) { 
+	                texte += "\n- " + trophees[i];
+	                musee.donnerTrophees(this, trophees[i]);
+	                trophees[i] = null; 
+	            }
+	        }
+	        nb_trophees = 0; 
+	        parler(texte); 
+	    }
 	}
+
 
 	public static void main(String[] args) {
 		Gaulois asterix = new Gaulois("Asterix", 8);
@@ -84,11 +87,5 @@ public class Gaulois {
 		LOGGER.info("Test methode boirePotion");
 		asterix.boirePotion(10);
 		LOGGER.info("Test methode faireUneDonnation");
-		Musee musee = new Musee();
-		asterix.trophees[asterix.nb_trophees++] = Equipement.BOUCLIER;
-		asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;
-		asterix.trophees[asterix.nb_trophees++] = Equipement.CASQUE;
-		asterix.faireUneDonnation(musee);
-		musee.extraireInstructionsCaml(asterix);
 	}
 }
